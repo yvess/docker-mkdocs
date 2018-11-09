@@ -1,9 +1,16 @@
 #!/bin/sh
 set -e
-cd /mkdocs
 
 if [ "$1" = 'serve' ]; then
-  # BUILD
+  # SERVE
+  cd /mkdocs
   exec mkdocs serve
 fi
+
+if [ "$1" = 'build' ]; then
+  # BUILD
+  cd /mkdocs
+  exec mkdocs build
+fi
+
 exec "$@"
