@@ -1,9 +1,11 @@
-FROM alpine:3.8
+FROM alpine:3.11
 MAINTAINER Yves Serrano <y@yas.ch>
 
-RUN apk add python3
-RUN pip3 install --upgrade pip && \
-    pip3 install mkdocs==1.0.4 Pygments==2.2.0 && \
+RUN apk add --no-cache python3
+RUN apk add --no-cache git && \
+    pip3 install mkdocs==1.1 Pygments==2.6.1 mkdocs-material==4.6.3 beautifulsoup4==4.8.2 && \
+    pip3 install git+https://github.com/pugong/mkdocs-mermaid-plugin && \
+    apk del git && \
     rm -rf /tmp/*
 ADD docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
